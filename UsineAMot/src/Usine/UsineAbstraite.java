@@ -12,6 +12,25 @@ public abstract class UsineAbstraite implements Usine {
 
 	public UsineAbstraite(String path) {
 		this.path = path;
+		
+		try {
+			BufferedReader bR = new BufferedReader(new FileReader(new File(path)));
+			String line;
+			
+			try {
+				while ((line = bR.readLine()) != null)
+				{
+					add(line);
+				}
+			} catch (IOException e) {
+				System.err.println("Erreur de flux");
+				e.printStackTrace();
+				System.exit(1);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 
 	@Override

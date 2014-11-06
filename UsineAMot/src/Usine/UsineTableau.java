@@ -1,11 +1,5 @@
 package Usine;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 public final class UsineTableau extends UsineAbstraite implements Usine{
 	
 	public final int TAILLE_INITIALE = 100;
@@ -14,30 +8,12 @@ public final class UsineTableau extends UsineAbstraite implements Usine{
 	
 	public UsineTableau(String path) {
 		super(path);
-		
-		elements = new String[TAILLE_INITIALE];
-		try {
-			BufferedReader bR = new BufferedReader(new FileReader(new File(path)));
-			String line;
-			
-			try {
-				while ((line = bR.readLine()) != null)
-				{
-					add(line);
-				}
-			} catch (IOException e) {
-				System.err.println("Erreur de flux");
-				e.printStackTrace();
-				System.exit(1);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
 	}
 
 	@Override
 	public boolean add(String mot) {
+		if (elements == null)
+			elements = new String[TAILLE_INITIALE];
 		if (nbMots == elements.length)
 		{
 			String[] tmp = elements.clone();
@@ -91,7 +67,7 @@ public final class UsineTableau extends UsineAbstraite implements Usine{
 		int nbOccurence = 0;
 		
 		for(int i = 0; i < nbMots; i++)
-			if (elements[i].contains(mot))
+			if (elements[i].matches(mot))
 				nbOccurence++;
 		
 		return nbOccurence;

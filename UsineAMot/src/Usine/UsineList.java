@@ -1,11 +1,5 @@
 package Usine;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 public final class UsineList extends UsineAbstraite implements Usine{
 
 	private final class Element {
@@ -33,24 +27,6 @@ public final class UsineList extends UsineAbstraite implements Usine{
 	
 	public UsineList(String path) {
 		super(path);
-		try {
-			BufferedReader bR = new BufferedReader(new FileReader(new File(path)));
-			String line;
-			
-			try {
-				while ((line = bR.readLine()) != null)
-				{
-					add(line);
-				}
-			} catch (IOException e) {
-				System.err.println("Erreur de flux");
-				e.printStackTrace();
-				System.exit(1);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
 	}
 
 	@Override
@@ -114,7 +90,7 @@ public final class UsineList extends UsineAbstraite implements Usine{
 			
 			while (curseur != null)
 			{
-				if (curseur.getMot().contains(mot))
+				if (curseur.getMot().matches(mot))
 					compteur++;
 				curseur = curseur.getSuivant();
 			}
