@@ -52,10 +52,9 @@ public class UsineTableau extends UsineAbstraite implements Usine{
 	@Override
 	public boolean search(String mot) {
 		int pos = 0;
-		
-		while (pos < nbMots && elements[pos] != mot)
+		while (pos < nbMots && ! elements[pos].equals(mot))
 			pos++;
-		return pos != nbMots;
+		return pos < nbMots;
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class UsineTableau extends UsineAbstraite implements Usine{
 	public boolean remove(String mot) {
 		int pos = 0;
 		
-		while (pos < nbMots && elements[pos] != mot)
+		while (pos < nbMots && ! elements[pos].equals(mot))
 			pos++;
 		if (pos != nbMots)
 		{
@@ -81,6 +80,7 @@ public class UsineTableau extends UsineAbstraite implements Usine{
 					elements[pos] = elements[pos+1];
 				pos++;
 			}
+			nbMots--;
 			return true;
 		}
 		return false;

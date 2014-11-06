@@ -1,13 +1,10 @@
 package Usine;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public abstract class UsineAbstraite implements Usine {
 	
@@ -46,28 +43,25 @@ public abstract class UsineAbstraite implements Usine {
 					if (search(instruction[1]))
 						System.out.println(instruction[1]+" présent");
 					else
-						System.out.println(instruction[1]+" présent");
+						System.out.println(instruction[1]+" absent");
 					break;
 					
 				case "ajoutDico":
-					try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
-					    
-						BufferedReader bRCopy = new BufferedReader(new FileReader(new File(instruction[1])));
-						
-						String lineCp;
-						
-						while((lineCp = bRCopy.readLine()) != null)
-							out.println(lineCp);
-					}catch (IOException e) {
-					    System.err.println("Problème avec le fichier");
-					}
+					BufferedReader bRAjout = new BufferedReader(new FileReader(new File(instruction[1])));	
+					String lineAjout;
+					
+					while ((lineAjout = bRAjout.readLine()) != null)
+						add(lineAjout);
+					
+					bRAjout.close();
 					break;
 					
 				case "compte":
-					System.out.println("Il y a " + count(instruction[1])+ "occurence(s) du mot" + instruction[1]);
+					System.out.println("Il y a " + count(instruction[1])+ " occurence(s) du mot " + instruction[1]);
 					break;
 				}
 			}
+			bR.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
