@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class UsineTableau extends UsineAbstraite implements Usine{
+public final class UsineTableau extends UsineAbstraite implements Usine{
 	
 	public final int TAILLE_INITIALE = 100;
 	private String[] elements;
