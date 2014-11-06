@@ -1,10 +1,10 @@
-import Usine.UsineTableau;
+import Usine.*;
 
 public class Main {
 
 	public static void main(String[] args){
-		UsineTableau usine = new UsineTableau("Dictionnaire.txt");
-		usine.doIt("action.txt");;
+		UsineList usine = new UsineList("Dictionnaire.txt");
+		usine.doIt("action.txt");
 	}
 
 }
