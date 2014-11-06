@@ -77,74 +77,78 @@ public final class UsineArbre extends UsineAbstraite implements Usine{
 		}
 
 		public boolean remove(String m) {
-			if (gauche != null)
+			
+			if (comparerString(m) < 0)
 			{
-				if (gauche.comparerString(m) < 0)
-					return gauche.remove(m);
-				else if (gauche.comparerString(m) == 0)
+				if (gauche != null)
 				{
-					if (gauche.getDroite() != null && gauche.getGauche() != null)
+					if (gauche.comparerString(m) == 0)
 					{
-						gauche.getDroite().add(gauche.getGauche());
-						gauche = gauche.getDroite();
+						if (gauche.getDroite() != null && gauche.getGauche() != null)
+						{
+							gauche.getDroite().add(gauche.getGauche());
+							gauche = gauche.getDroite();
+						}
+						else if (gauche.getGauche() != null)
+						{
+							gauche = gauche.getGauche();
+						}
+						else if (gauche.getDroite() != null)
+						{
+							gauche = gauche.getDroite();
+						}
+						else
+							gauche = null;
+						return true;
 					}
-					else if (gauche.getGauche() != null)
-					{
-						gauche = gauche.getGauche();
-					}
-					else if (gauche.getDroite() != null)
-					{
-						gauche = gauche.getDroite();
-					}
-					else
-						gauche = null;
-					return true;
+					return gauche.remove(m);
 				}
 			}
-			else if (droite != null)
+			else if (comparerString(m) > 0)
 			{
-				if (droite.comparerString(m) > 1)
-					return droite.remove(m);
-				else if (droite.comparerString(m) == 0)
+				if (droite != null)
 				{
-					if (droite.getDroite() != null && droite.getGauche() != null)
+					if (droite.comparerString(m) == 0)
 					{
-						droite.getDroite().add(droite.getGauche());
-						droite = droite.getDroite();
+						if (droite.getDroite() != null && droite.getGauche() != null)
+						{
+							droite.getDroite().add(droite.getGauche());
+							droite = droite.getDroite();
+						}
+						else if (droite.getGauche() != null)
+						{
+							droite = droite.getGauche();
+						}
+						else if (droite.getDroite() != null)
+						{
+							droite = droite.getDroite();
+						}
+						else
+							droite = null;
+						return true;
 					}
-					else if (droite.getGauche() != null)
-					{
-						droite = droite.getGauche();
-					}
-					else if (droite.getDroite() != null)
-					{
-						droite = droite.getDroite();
-					}
-					else
-						droite = null;
-					return true;
+					return droite.remove(m);
 				}
 			}
 			return false;
 		}
 		
 		public int count(int compteur, String m) {
-			if (m.matches(m))
+			if (mot.matches(m))
 				compteur++;
 			if (gauche != null && droite != null)
 			{
-				compteur += gauche.count(0, m);
-				compteur += droite.count(0, m);
+				compteur = gauche.count(compteur, m);
+				return droite.count(compteur, m);
 			}
 			else if (gauche != null)
 			{
-				compteur += gauche.count(0, m);
+				return gauche.count(compteur, m);
 			}
 			else if (droite != null)
 			{
-				compteur += droite.count(0, m);
+				return droite.count(compteur, m);
 			}
-			
 			return compteur;
 		}
 		
