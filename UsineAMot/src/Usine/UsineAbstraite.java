@@ -78,6 +78,10 @@ public abstract class UsineAbstraite implements Usine {
 				case "compte":
 					System.out.println("Il y a " + count(instruction[1])+ " occurence(s) du mot " + instruction[1]);
 					break;
+					
+				case "supprimeTout":
+					removeAll();
+					break;
 				}
 			}
 			bR.close();

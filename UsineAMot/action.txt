@@ -1,9 +1,0 @@
-cherche mot
-cherche phrase
-ajout phrase
-cherche phrase
-supprime jeux
-cherche jeux
-ajoutDico add.txt
-search autres
-compte est
